@@ -2,14 +2,14 @@
     "compilerOptions": {
       "target": "ES5",
       "lib": ["DOM", "ESNext"],
-      "jsx": "react",
+      "jsx": "react-jsx",
       "module": "ESNext",
       "moduleResolution": "node",
       "strict": true,
       "esModuleInterop": true,
       "skipLibCheck": true,
       "forceConsistentCasingInFileNames": true,
-      "outDir": "./dist"
+      "outDir": "./dist",
     },
     "include": [
       "src/**/*"

@@ -1,0 +1,79 @@
+import { useQuery } from "@tanstack/react-query";
+
+# `createQuery` Function
+
+The `createQuery` function is a utility for simplifying the creation of reusable and dynamic React Query hooks. It allows developers to define a query function with customizable `queryKey` and `url`, making it easier to manage queries in a type-safe and structured way.
+
+## Usage
+
+```tsx
+import createQuery from "./createQuery";
+
+// Example: Define a query with dynamic variables
+const useUserQuery = createQuery<{userId: string}>({
+  url: (variables) => `/api/users/${variables.userId}`,
+  queryKey: (variables) => ["user", variables.userId]
+});
+
+// Using the hook in a component
+const Component = () => {
+  const { data, isLoading, error } = useUserQuery({ variables: { userId: "123" } });
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  return <div>User Name: {data.name}</div>;
+};
+```
+
+
+### Generic Parameters
+- `<V>`: Represents the type of variables used to generate the query's `url` and `queryKey`.
+
+## Parameters
+
+### `options: CreateQueryOptions<V>`
+An object containing the configuration for the query.
+
+- **`url`** (`string | QueryUrlFn<V>`):
+  - A URL string or a function that generates the URL dynamically based on the input variables.
+  - `QueryUrlFn<V>` is defined as `(v: V) => string`.
+
+- **`queryKey`** (`QueryKey | ((a: V) => QueryKey)`):
+  - A static `QueryKey` or a function that generates a dynamic `QueryKey` based on the input variables.
+
+## Example
+
+Here is an example of using `createQuery` for a posts query:
+
+```tsx
+const usePostsQuery = createQuery({
+  url: (variables) => `/api/posts?page=${variables.page}`,
+  queryKey: (variables) => ["posts", variables.page]
+});
+
+const PostsComponent = () => {
+  const { data, isLoading, error } = usePostsQuery({ variables: { page: 1 } });
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  return (
+    <ul>
+      {data.posts.map((post) => (
+        <li key={post.id}>{post.title}</li>
+      ))}
+    </ul>
+  );
+};
+```
+
+## Key Benefits
+
+- **Reusability**: Define queries once and reuse them across components.
+- **Type Safety**: Ensure the `url` and `queryKey` generation functions are type-safe.
+- **Dynamic Queries**: Easily generate `url` and `queryKey` based on input variables.
+
+---
+
+For more details, refer to the [React Query documentation](https://tanstack.com/query/latest/docs).

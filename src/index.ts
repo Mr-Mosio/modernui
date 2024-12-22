@@ -1,6 +1,8 @@
 import "./index.css"
-import Button from "./components/Button";
+import ModernUiProvider from "./providers/ModernUiProvider"
+import withMU from "./utils/withMU"
 
 export {
-    Button,
+    ModernUiProvider,
+    withMU
 }

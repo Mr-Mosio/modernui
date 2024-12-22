@@ -1,0 +1,108 @@
+# `withMU` Function Documentation
+
+The `withMU` function is a utility for merging custom Tailwind CSS configurations with default settings for the `@nextui-org/react` library. This makes it easier to integrate modern UI features into your project.
+
+---
+
+### **Parameters**
+
+#### `config: ModernUiConfig`
+An object that extends the Tailwind CSS `Config` type with the following properties:
+
+- **`modernUI`**: Configuration specific to the `@nextui-org/react` plugin.
+- Other standard Tailwind CSS configuration options (e.g., `theme`, `plugins`, etc.).
+
+### **Return Value**
+The function returns a merged Tailwind CSS configuration object that includes default settings, custom configurations, and the `nextui` plugin.
+
+---
+
+## **How to Use**
+
+### Step 1: Import the Function
+
+Import the `withMU` function into your Tailwind CSS configuration file:
+
+```javascript
+import withMU from "./path/to/withMU";
+```
+
+### Step 2: Define Your Configuration
+
+Create a custom Tailwind CSS configuration object that includes your customizations and `modernUI` settings:
+
+```typescript
+const customConfig = {
+  content: ["./src/**/*.{js,ts,jsx,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        primary: "#1DA1F2",
+      },
+    },
+  },
+  modernUI: {
+   
+  },
+};
+```
+
+### Step 3: Export the Merged Configuration
+
+Pass your configuration to the `withMU` function and export the result:
+
+```javascript
+export default withMU(customConfig);
+```
+
+### Example Output
+The `withMU` function will merge the default Tailwind CSS configuration with your custom settings and apply the `nextui` plugin.
+
+---
+
+## **Benefits**
+
+1. **Ease of Integration**: Simplifies the process of integrating `@nextui-org/react` with Tailwind CSS.
+2. **Customizable**: Allows you to extend the default configuration with your own themes and plugins.
+3. **Support for Modern UI**: Enables advanced features from `@nextui-org/react` effortlessly.
+
+---
+
+## **Complete Example**
+
+Here’s a complete example of a `tailwind.config.js` file using the `withMU` function:
+
+```javascript
+import withMU from "./withMU";
+
+const customConfig = {
+  theme: {
+    extend: {
+      colors: {
+        success: "#28a745",
+        danger: "#dc3545",
+      },
+    },
+  },
+  modernUI: {
+    theme: "dark",
+    disableTransitionOnChange: false,
+  },
+};
+
+export default withMU(customConfig);
+```
+
+---
+
+## **Notes**
+
+- Ensure all dependencies are installed and configured correctly.
+- Update `content` paths in `defaultConfig` to include all files you want Tailwind CSS to process.
+
+---
+
+## **References**
+
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs/)
+- [@nextui-org/react Documentation](https://nextui.org/docs/)
